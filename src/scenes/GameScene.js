@@ -8,6 +8,7 @@ import {
   TILE_EMPTY,
   TILE_PATH,
   GAME_STATE,
+  SCORE_COLLECTIBLE_BONUS,
 } from '../config.js';
 import { TEXTURES } from '../assets/AssetGenerator.js';
 import { getLevel, TOTAL_LEVELS } from '../data/levels.js';
@@ -15,6 +16,7 @@ import GridSystem from '../systems/GridSystem.js';
 import PathValidator from '../systems/PathValidator.js';
 import RabbitMovement from '../systems/RabbitMovement.js';
 import ScoreSystem from '../systems/ScoreSystem.js';
+import CollectibleSystem from '../systems/CollectibleSystem.js';
 import AudioManager from '../systems/AudioManager.js';
 import { createRabbit, stopIdleAnimation, hopRabbit } from '../entities/Rabbit.js';
 import { createGameButton, setButtonEnabled } from '../ui/GameButton.js';
@@ -35,12 +37,15 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
     this.gridSystem = new GridSystem(this.level);
+    this.collectibleSystem = new CollectibleSystem(this.level);
     this.pathValidator = new PathValidator();
     this.rabbitMovement = new RabbitMovement(this);
     this.scoreSystem = new ScoreSystem();
     this.audio = new AudioManager();
     this.cellViews = [];
     this.hitAreas = [];
+    this.collectibleSprites = new Map();
+    this.phaseCollectibleBonus = 0;
     this.gameState = GAME_STATE.BUILDING;
     this.isPathValid = false;
     this.phaseStartTime = Date.now();
@@ -55,6 +60,7 @@ export default class GameScene extends Phaser.Scene {
 
     this.createHud();
     this.createGrid();
+    this.createCollectibles();
     this.createRabbit();
     this.createGoButton();
     this.updateHud();
@@ -82,6 +88,18 @@ export default class GameScene extends Phaser.Scene {
       strokeThickness: 2,
     }).setOrigin(0.5, 0);
     this.phaseText.setText(`Fase ${this.level.id}`);
+
+    if (this.collectibleSystem.getTotal() > 0) {
+      this.collectText = this.add.text(GAME_WIDTH / 2, 38, '', {
+        fontFamily: 'Arial, sans-serif',
+        fontSize: '14px',
+        fontStyle: 'bold',
+        color: '#E65100',
+        stroke: '#FFFFFF',
+        strokeThickness: 2,
+      }).setOrigin(0.5, 0);
+      this.updateCollectHud();
+    }
 
     this.add
       .image(GAME_WIDTH - 70, 26, TEXTURES.HUD_PANEL)
@@ -115,6 +133,56 @@ export default class GameScene extends Phaser.Scene {
   updateScoreHud() {
     const sessionScore = this.registry.get('sessionScore') || 0;
     this.scoreText.setText(`Pts: ${sessionScore}`);
+  }
+
+  updateCollectHud() {
+    if (!this.collectText) return;
+    const collected = this.collectibleSystem.getCollectedCount();
+    const total = this.collectibleSystem.getTotal();
+    this.collectText.setText(`🥚 ${collected}/${total}`);
+  }
+
+  createCollectibles() {
+    for (const { col, row } of this.level.collectibles ?? []) {
+      const { x, y } = this.getCellWorldPos(col, row);
+      const egg = this.add
+        .image(x, y, TEXTURES.EGG)
+        .setDisplaySize(30, 30)
+        .setDepth(6);
+
+      this.tweens.add({
+        targets: egg,
+        y: y - 4,
+        duration: 800,
+        yoyo: true,
+        repeat: -1,
+        ease: 'Sine.easeInOut',
+      });
+
+      this.collectibleSprites.set(`${col},${row}`, egg);
+    }
+  }
+
+  tryCollect(col, row) {
+    if (!this.collectibleSystem.collectAt(col, row)) return;
+
+    this.phaseCollectibleBonus += SCORE_COLLECTIBLE_BONUS;
+
+    this.audio.playCollect();
+    this.updateCollectHud();
+
+    const key = `${col},${row}`;
+    const sprite = this.collectibleSprites.get(key);
+    if (sprite) {
+      this.tweens.add({
+        targets: sprite,
+        scale: 0,
+        alpha: 0,
+        duration: 200,
+        onComplete: () => sprite.destroy(),
+      });
+      this.collectibleSprites.delete(key);
+    }
   }
 
   createRabbit() {
@@ -261,7 +329,10 @@ export default class GameScene extends Phaser.Scene {
       path,
       (col, row) => this.getCellWorldPos(col, row),
       () => this.onMovementComplete(),
-      () => hopRabbit(this, this.rabbit)
+      (cell) => {
+        hopRabbit(this, this.rabbit);
+        this.tryCollect(cell.col, cell.row);
+      }
     );
   }
 
@@ -284,7 +355,8 @@ export default class GameScene extends Phaser.Scene {
     const phaseScore = this.scoreSystem.calculate(
       this.gridSystem.getPathTilesUsed(),
       elapsedMs,
-      maxPathTiles
+      maxPathTiles,
+      this.phaseCollectibleBonus
     );
     const sessionScore = (this.registry.get('sessionScore') || 0) + phaseScore;
     this.registry.set('sessionScore', sessionScore);
@@ -298,6 +370,8 @@ export default class GameScene extends Phaser.Scene {
       sessionScore,
       levelNumber: this.level.id,
       isLastLevel,
+      collectiblesCollected: this.collectibleSystem.getCollectedCount(),
+      collectiblesTotal: this.collectibleSystem.getTotal(),
       onNextPhase: () => {
         this.registry.set('currentLevelIndex', this.levelIndex + 1);
         this.scene.restart();

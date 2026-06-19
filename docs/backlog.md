@@ -71,5 +71,5 @@ Prioridade: **P0** (crítico para MVP) · **P1** (importante) · **P2** (desejá
 | ID | User Story | Sprint |
 |----|-----------|--------|
 | US-100 | Múltiplas fases com dificuldade crescente (5 fases, progressão linear) | 6 |
-| US-101 | Colecionáveis no caminho | Futuro |
+| US-101 | Colecionáveis no caminho (estrelas, bônus +150 pts) | 7 |
 | US-102 | Adaptação para Telegram Mini App | Futuro |

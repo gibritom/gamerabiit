@@ -1,8 +1,15 @@
-import { generateGameTextures } from '../assets/AssetGenerator.js';
+import {
+  generateGameTextures,
+  preloadSpriteAssets,
+} from '../assets/AssetGenerator.js';
 
 export default class BootScene extends Phaser.Scene {
   constructor() {
     super({ key: 'BootScene' });
+  }
+
+  preload() {
+    preloadSpriteAssets(this);
   }
 
   create() {

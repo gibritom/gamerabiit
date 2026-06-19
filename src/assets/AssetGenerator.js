@@ -8,13 +8,24 @@ export const TEXTURES = {
   BUTTON: 'ui-button',
   BACKGROUND: 'bg-meadow',
   HUD_PANEL: 'hud-panel',
+  EGG: 'collectible-egg',
 };
+
+export const SPRITE_FILES = {
+  [TEXTURES.RABBIT]: 'assets/sprites/rabbit.png',
+  [TEXTURES.CARROT]: 'assets/sprites/carrot.png',
+  [TEXTURES.EGG]: 'assets/sprites/egg.png',
+};
+
+export function preloadSpriteAssets(scene) {
+  for (const [key, path] of Object.entries(SPRITE_FILES)) {
+    scene.load.image(key, path);
+  }
+}
 
 export function generateGameTextures(scene) {
   generateGrass(scene);
   generatePath(scene);
-  generateRabbit(scene);
-  generateCarrot(scene);
   generateButton(scene);
   generateHudPanel(scene);
   generateBackground(scene);
@@ -56,57 +67,6 @@ function generatePath(scene) {
     [[12, 14], [34, 10], [50, 28], [16, 42], [44, 48], [28, 26]].forEach(([x, y]) => {
       g.fillCircle(x, y, 2.5);
     });
-  });
-}
-
-function generateRabbit(scene) {
-  const size = 56;
-  drawTexture(scene, TEXTURES.RABBIT, size, size, (g, w, h) => {
-    const cx = w / 2;
-    const cy = h / 2 + 4;
-
-    g.fillStyle(0xffcdd2, 1);
-    g.fillEllipse(cx - 12, cy - 22, 10, 18);
-    g.fillEllipse(cx + 12, cy - 22, 10, 18);
-
-    g.fillStyle(0xf5f5f5, 1);
-    g.fillEllipse(cx - 12, cy - 22, 7, 14);
-    g.fillEllipse(cx + 12, cy - 22, 7, 14);
-
-    g.fillStyle(0xffffff, 1);
-    g.fillCircle(cx, cy, 20);
-    g.fillCircle(cx, cy - 10, 14);
-
-    g.fillStyle(0xeeeeee, 0.5);
-    g.fillEllipse(cx, cy + 6, 16, 12);
-
-    g.fillStyle(0x333333, 1);
-    g.fillCircle(cx - 6, cy - 8, 3);
-    g.fillCircle(cx + 6, cy - 8, 3);
-    g.fillStyle(0xff8a80, 1);
-    g.fillCircle(cx, cy - 2, 3);
-  });
-}
-
-function generateCarrot(scene) {
-  const size = TILE_SIZE;
-  drawTexture(scene, TEXTURES.CARROT, size, size, (g, w, h) => {
-    const cx = w / 2;
-
-    g.fillStyle(0xff9800, 1);
-    g.fillTriangle(cx, h - 10, cx - 14, h - 38, cx + 14, h - 38);
-    g.fillStyle(0xf57c00, 1);
-    g.fillTriangle(cx + 2, h - 12, cx - 10, h - 36, cx + 14, h - 38);
-
-    g.lineStyle(2, 0xe65100, 0.4);
-    g.lineBetween(cx - 4, h - 20, cx - 2, h - 32);
-    g.lineBetween(cx + 3, h - 18, cx + 5, h - 30);
-
-    g.fillStyle(0x66bb6a, 1);
-    g.fillEllipse(cx - 8, h - 42, 6, 12);
-    g.fillEllipse(cx + 8, h - 42, 6, 12);
-    g.fillStyle(0x43a047, 1);
-    g.fillRect(cx - 3, h - 48, 6, 14);
   });
 }
 

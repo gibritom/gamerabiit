@@ -1,5 +1,27 @@
 # Release Notes — O Caminho do Coelho
 
+## 1.2.0 — Colecionáveis (2026-06-19)
+
+**Sprint 7 — US-101**
+
+Estrelas colecionáveis opcionais em cada fase — bônus de pontuação ao incluir no caminho.
+
+### Novidades
+
+- Estrelas ★ visíveis no grid (1–2 por fase)
+- Coleta automática quando o coelho passa pela célula
+- **+150 pts** por estrela
+- HUD **★ X/Y** e contagem no overlay de vitória
+- Som de coleta
+
+### Jogar
+
+```
+https://gibritom.github.io/gamerabiit/
+```
+
+---
+
 ## 1.1.0 — Múltiplas Fases (2026-06-19)
 
 **Sprint 6 — US-100**

@@ -1,17 +1,20 @@
 {
   "name": "o-caminho-do-coelho",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "O Caminho do Coelho — puzzle casual web",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sprites": "node scripts/process-sprites.mjs",
+    "sprites:generate": "node scripts/generate-sprites.mjs"
   },
   "dependencies": {
     "phaser": "^3.80.1"
   },
   "devDependencies": {
+    "sharp": "^0.35.1",
     "vite": "^5.4.11"
   }
 }

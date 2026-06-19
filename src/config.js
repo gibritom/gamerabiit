@@ -43,4 +43,6 @@ export const SCORE_TILE_BONUS = 50;
 export const SCORE_TIME_BONUS_MAX = 500;
 export const SCORE_TIME_THRESHOLD_MS = 60000;
 
+export const SCORE_COLLECTIBLE_BONUS = 150;
+
 export const COLORS_FLASH = 0xfff9c4;

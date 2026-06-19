@@ -146,3 +146,16 @@ Toda decisão aprovada permanece registrada. Nunca remover decisões antigas.
 | **Motivo** | Aumentar retenção e replayability após MVP publicado. |
 | **Aprovado por** | Game Director |
 | **Impacto** | Sprint 6 planejada; escopo técnico em `docs/sprints.md`. |
+
+---
+
+## DEC-012
+
+| Campo | Valor |
+|-------|-------|
+| **Data** | 2026-06-19 |
+| **Título** | Aprovação Sprint 7 — US-101 Colecionáveis |
+| **Descrição** | Game Director aprovou Sprint 7: **estrelas colecionáveis no caminho** com bônus de pontuação (+150 pts). Versão alvo 1.2.0. Coleta opcional — vitória não depende de coletar todas. |
+| **Motivo** | Complementar múltiplas fases com variedade de gameplay e incentivo de exploração de rotas. |
+| **Aprovado por** | Game Director |
+| **Impacto** | Sprint 7 entregue; US-102 e KI-001 permanecem no backlog. |

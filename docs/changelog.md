@@ -4,6 +4,28 @@
 
 ---
 
+## 1.2.0 — 2026-06-19
+
+**Sprint:** 7 — Colecionáveis (US-101)
+
+### Adicionado
+
+- `CollectibleSystem` — rastreamento de estrelas por fase
+- Estrelas colecionáveis em `levels.js` (1–2 por fase)
+- Textura `STAR` no `AssetGenerator`
+- Som de coleta (`playCollect`)
+- HUD **★ X/Y** durante a fase
+- Bônus **+150 pts** por estrela coletada
+- Overlay de vitória exibe colecionáveis
+
+### Alterado
+
+- `ScoreSystem.calculate()` aceita bônus de colecionáveis
+- `VictoryOverlay` exibe linha de colecionáveis
+- Coleta ocorre tile a tile durante movimento do coelho
+
+---
+
 ## 1.1.0 — 2026-06-19
 
 **Sprint:** 6 — Múltiplas Fases (US-100)

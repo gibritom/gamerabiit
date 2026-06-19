@@ -1,7 +1,7 @@
 # GDD — O Caminho do Coelho
 
 **Agente responsável:** Game Designer  
-**Versão:** 1.5 (Sprint 6)  
+**Versão:** 1.6 (Sprint 7)  
 **Aprovado por:** Game Director
 
 ---
@@ -68,6 +68,14 @@ Construir um caminho contínuo do coelho até a cenoura usando os tiles disponí
 - Score acumula entre fases na mesma sessão.
 - Novo jogo (menu) reseta fase e score.
 
+### 4.8 Colecionáveis (Sprint 7+)
+
+- Estrelas ★ em células fixas por fase (1–2 por fase).
+- Coleta ao passar com o coelho — **opcional** para vencer.
+- Bônus: **+150 pts** por estrela.
+- Feedback: som agudo, animação de desaparecimento, HUD **★ X/Y**.
+- Overlay de vitória exibe colecionáveis obtidos.
+
 ### 4.6 Pontuação (Sprint 3+)
 
 - Pontos base: 1000 por fase completada.
@@ -104,7 +112,7 @@ Construir um caminho contínuo do coelho até a cenoura usando os tiles disponí
 [Tela de Conclusão] → Voltar ao Menu
 ```
 
-**Sprint 6:** 5 fases jogáveis; progressão linear; HUD "Fase N"; conclusão após Fase 5.
+**Sprint 7:** estrelas colecionáveis opcionais; bônus de pontuação; HUD ★ X/Y.
 
 **Sprint 0:** apenas Tela Inicial → Cena de Jogo (grid estático, sem interação).
 
@@ -123,6 +131,7 @@ Construir um caminho contínuo do coelho até a cenoura usando os tiles disponí
 | Elemento | Posição | Sprint |
 |----------|---------|--------|
 | Título da fase | Topo central | 6 ✓ |
+| Colecionáveis ★ | Abaixo do título | 7 ✓ |
 | Tiles restantes | Canto superior direito | 1 |
 | Pontuação | Canto superior esquerdo | 3 |
 | Botão "Ir!" | Rodapé central | 2 |

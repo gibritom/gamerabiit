@@ -96,6 +96,18 @@ Entregar um puzzle casual web onde o jogador constrói caminhos para guiar um co
 
 ---
 
+## Sprint 7 — Colecionáveis (US-101)
+
+| Campo | Valor |
+|-------|-------|
+| **Objetivo** | Estrelas colecionáveis no grid — bônus opcional ao passar com o coelho |
+| **Funcionalidades** | Sprite estrela, coleta no movimento, som, HUD ★ X/Y, bônus +150 pts |
+| **Critérios de Aceite** | Colecionáveis visíveis por fase; coleta ao passar; score e overlay atualizados |
+| **Status** | Concluída |
+| **Observações** | v1.2.0 — `CollectibleSystem`; dados em `levels.js` |
+
+---
+
 ## Prioridades Globais
 
 1. Gameplay funcional (Sprints 1–2) ✓
@@ -103,3 +115,4 @@ Entregar um puzzle casual web onde o jogador constrói caminhos para guiar um co
 3. Visual (Sprint 4) ✓
 4. Publicação (Sprint 5) ✓
 5. Conteúdo e retenção — múltiplas fases (Sprint 6) ✓
+6. Variedade de gameplay — colecionáveis (Sprint 7) ✓

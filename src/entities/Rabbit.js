@@ -2,7 +2,7 @@ import { TEXTURES } from '../assets/AssetGenerator.js';
 
 export function createRabbit(scene, x, y) {
   const rabbit = scene.add.sprite(x, y, TEXTURES.RABBIT);
-  rabbit.setDisplaySize(48, 48);
+  rabbit.setDisplaySize(56, 56);
   rabbit.setDepth(10);
 
   rabbit.idleTween = scene.tweens.add({

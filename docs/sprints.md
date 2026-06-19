@@ -4,6 +4,48 @@
 
 ---
 
+## Sprint 7 — Colecionáveis (US-101)
+
+**Status:** Concluída
+
+**Objetivo:** Estrelas colecionáveis opcionais no grid — jogador ganha bônus ao incluir no caminho.
+
+**Versão:** 1.2.0
+
+### Backlog
+
+| ID | User Story | Agente | Status |
+|----|-----------|--------|--------|
+| S7-01 | US-101 — `CollectibleSystem` + dados em `levels.js` | Software Architect | Concluído |
+| S7-02 | US-101 — Coleta durante movimento do coelho | Gameplay Developer | Concluído |
+| S7-03 | US-101 — Sprite estrela + animação idle | UI/UX Designer | Concluído |
+| S7-04 | US-101 — Som de coleta + HUD ★ X/Y | Gameplay Developer | Concluído |
+| S7-05 | US-101 — Bônus +150 pts e overlay de vitória | Gameplay Developer | Concluído |
+| S7-06 | docs/GDD + architecture v1.6 | Documentation | Concluído |
+| S7-07 | Casos de teste Sprint 7 | QA | Aprovado |
+| S7-08 | Build 1.2.0 | Build & Release | Concluído |
+
+### Critérios de Aceite
+
+- [x] Cada fase exibe estrelas em posições definidas
+- [x] Coelho coleta estrela ao passar pela célula
+- [x] Feedback sonoro e visual na coleta
+- [x] HUD mostra ★ coletados/total
+- [x] +150 pts por estrela no score da fase
+- [x] Overlay de vitória exibe colecionáveis
+- [x] Vitória não exige coletar todas as estrelas
+
+### Resumo da Entrega
+
+- **Versão:** 1.2.0 — **US-101 ENTREGUE**
+- **Módulos:** `CollectibleSystem.js`, `levels.js` (collectibles), textura `STAR`
+
+### Próxima evolução
+
+US-102 (Telegram) · KI-001 (bundle)
+
+---
+
 ## Sprint 6 — Múltiplas Fases (US-100)
 
 **Status:** Concluída
@@ -111,7 +153,7 @@
 
 ### Próxima evolução (pós-MVP)
 
-US-100 → **Sprint 6 (em planejamento)** · US-101 (colecionáveis) · US-102 (Telegram) · KI-001 (bundle).
+US-101 → **Sprint 7 (concluída)** · US-102 (Telegram) · KI-001 (bundle).
 
 ---
 
@@ -125,6 +167,7 @@ US-100 → **Sprint 6 (em planejamento)** · US-101 (colecionáveis) · US-102 (
 
 | Sprint | Status | Versão | Data |
 |--------|--------|--------|------|
+| 7 — Colecionáveis | Concluída | 1.2.0 | 2026-06-19 |
 | 6 — Múltiplas Fases | Concluída | 1.1.0 | 2026-06-19 |
 | 5 — Publicação MVP | Concluída | 1.0.0 | 2026-06-18 |
 | 4 — Visual Polish | Concluída | 0.5.1 | 2026-06-18 |

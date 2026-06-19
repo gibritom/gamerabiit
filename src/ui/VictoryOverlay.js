@@ -8,15 +8,27 @@ export default class VictoryOverlay {
     this.elements = [];
   }
 
-  show({ phaseScore, sessionScore, levelNumber, isLastLevel, onNextPhase, onRestart, onMenu }) {
+  show({
+    phaseScore,
+    sessionScore,
+    levelNumber,
+    isLastLevel,
+    collectiblesCollected = 0,
+    collectiblesTotal = 0,
+    onNextPhase,
+    onRestart,
+    onMenu,
+  }) {
     const depth = 100;
+    const hasCollectibles = collectiblesTotal > 0;
+    const panelHeight = isLastLevel ? (hasCollectibles ? 350 : 320) : (hasCollectibles ? 370 : 340);
+    const buttonOffset = hasCollectibles ? 30 : 0;
 
     const overlay = this.scene.add
       .rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x000000, 0.55)
       .setDepth(depth);
     this.elements.push(overlay);
 
-    const panelHeight = isLastLevel ? 320 : 340;
     const panel = this.scene.add
       .rectangle(GAME_WIDTH / 2, 300, 420, panelHeight, 0xffffff, 0.95)
       .setStrokeStyle(4, 0xff9800)
@@ -53,8 +65,28 @@ export default class VictoryOverlay {
       .setDepth(depth + 2);
     this.elements.push(phaseScoreText);
 
+    let detailY = 310;
+
+    if (hasCollectibles) {
+      const collectText = this.scene.add
+        .text(
+          GAME_WIDTH / 2,
+          detailY,
+          `🥚 Ovos coletados: ${collectiblesCollected}/${collectiblesTotal}`,
+          {
+            fontFamily: 'Arial, sans-serif',
+            fontSize: '16px',
+            color: '#E65100',
+          }
+        )
+        .setOrigin(0.5)
+        .setDepth(depth + 2);
+      this.elements.push(collectText);
+      detailY += 28;
+    }
+
     const sessionScoreText = this.scene.add
-      .text(GAME_WIDTH / 2, 310, `Total: ${sessionScore} pts`, {
+      .text(GAME_WIDTH / 2, detailY, `Total: ${sessionScore} pts`, {
         fontFamily: 'Arial, sans-serif',
         fontSize: '18px',
         color: '#5D4037',
@@ -67,7 +99,7 @@ export default class VictoryOverlay {
       const { button: menuBtn, text: menuText } = createGameButton(
         this.scene,
         GAME_WIDTH / 2,
-        370,
+        370 + buttonOffset,
         'VOLTAR AO MENU',
         onMenu,
         { width: 260, height: 56, fontSize: '18px' }
@@ -79,7 +111,7 @@ export default class VictoryOverlay {
       const { button: restartBtn, text: restartText } = createGameButton(
         this.scene,
         GAME_WIDTH / 2,
-        430,
+        430 + buttonOffset,
         'JOGAR NOVAMENTE',
         onRestart,
         { width: 260, height: 48, fontSize: '16px' }
@@ -91,7 +123,7 @@ export default class VictoryOverlay {
       const { button: nextBtn, text: nextText } = createGameButton(
         this.scene,
         GAME_WIDTH / 2,
-        360,
+        360 + buttonOffset,
         'PRÓXIMA FASE',
         onNextPhase,
         { width: 260, height: 56, fontSize: '18px' }
@@ -103,7 +135,7 @@ export default class VictoryOverlay {
       const { button: restartBtn, text: restartText } = createGameButton(
         this.scene,
         GAME_WIDTH / 2,
-        420,
+        420 + buttonOffset,
         'JOGAR NOVAMENTE',
         onRestart,
         { width: 260, height: 48, fontSize: '16px' }

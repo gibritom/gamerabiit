@@ -53,4 +53,9 @@ export default class AudioManager {
       setTimeout(() => this.playTone(freq, 0.18, 'sine', 0.22), index * 110);
     });
   }
+
+  playCollect() {
+    this.playTone(880, 0.06, 'sine', 0.2);
+    setTimeout(() => this.playTone(1175, 0.1, 'sine', 0.18), 60);
+  }
 }
