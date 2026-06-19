@@ -84,9 +84,22 @@ Entregar um puzzle casual web onde o jogador constrói caminhos para guiar um co
 
 ---
 
+## Sprint 6 — Múltiplas Fases (US-100)
+
+| Campo | Valor |
+|-------|-------|
+| **Objetivo** | 5 fases jogáveis com progressão linear de dificuldade |
+| **Funcionalidades** | Dados de fase, HUD com número da fase, avanço após vitória, score acumulado na sessão |
+| **Critérios de Aceite** | 5 fases distintas jogáveis; progressão Fase 1→5; reinício por fase; conclusão da Fase 5 |
+| **Status** | Concluída |
+| **Observações** | v1.1.0 — 5 fases com progressão linear; `src/data/levels.js` |
+
+---
+
 ## Prioridades Globais
 
-1. Gameplay funcional (Sprints 1–2)
-2. Feedback e pontuação (Sprint 3)
-3. Visual (Sprint 4)
-4. Publicação (Sprint 5)
+1. Gameplay funcional (Sprints 1–2) ✓
+2. Feedback e pontuação (Sprint 3) ✓
+3. Visual (Sprint 4) ✓
+4. Publicação (Sprint 5) ✓
+5. Conteúdo e retenção — múltiplas fases (Sprint 6) ✓

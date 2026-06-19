@@ -39,6 +39,8 @@ export default class MenuScene extends Phaser.Scene {
     this.add.image(GAME_WIDTH / 2 + 80, mascotY, TEXTURES.CARROT).setDisplaySize(56, 56);
 
     createGameButton(this, GAME_WIDTH / 2, 420, 'JOGAR', () => {
+      this.registry.set('currentLevelIndex', 0);
+      this.registry.set('sessionScore', 0);
       this.scene.start('GameScene');
     });
   }

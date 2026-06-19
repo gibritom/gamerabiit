@@ -4,6 +4,79 @@
 
 ---
 
+## Sprint 6 — Múltiplas Fases (US-100)
+
+**Status:** Concluída
+
+**Objetivo:** 5 fases jogáveis com progressão linear — posições e limites de tiles crescentes em dificuldade.
+
+**Versão:** 1.1.0
+
+**Responsáveis:** Software Architect, Gameplay Developer, UI/UX Designer, QA, Documentation, Build & Release
+
+### Backlog
+
+| ID | User Story | Agente | Status |
+|----|-----------|--------|--------|
+| S6-01 | US-100 — Estrutura de dados de fases (`levels.js`) | Software Architect | Concluído |
+| S6-02 | US-100 — GridSystem/GameScene carregam fase ativa | Gameplay Developer | Concluído |
+| S6-03 | US-100 — HUD exibe "Fase N" | UI/UX Designer | Concluído |
+| S6-04 | US-100 — Vitória avança para próxima fase | Gameplay Developer | Concluído |
+| S6-05 | US-100 — Tela de conclusão após Fase 5 | UI/UX Designer | Concluído |
+| S6-06 | US-100 — Score acumulado entre fases (sessão) | Gameplay Developer | Concluído |
+| S6-07 | docs/GDD + architecture v1.5 | Documentation | Concluído |
+| S6-08 | Casos de teste Sprint 6 | QA | Aprovado |
+| S6-09 | Deploy 1.1.0 | Build & Release | Concluído (build local) |
+
+### Dados das 5 Fases
+
+| Fase | Coelho (col, row) | Cenoura (col, row) | Tiles máx. |
+|------|-------------------|--------------------|------------|
+| 1 | (0, 0) | (7, 0) | 20 |
+| 2 | (0, 2) | (7, 5) | 18 |
+| 3 | (2, 0) | (5, 7) | 16 |
+| 4 | (0, 7) | (7, 0) | 14 |
+| 5 | (1, 1) | (6, 6) | 12 |
+
+### Critérios de Aceite
+
+- [x] Jogador inicia na Fase 1 ao clicar JOGAR
+- [x] Cada fase tem posições distintas de coelho/cenoura e limite de tiles
+- [x] HUD mostra número da fase atual
+- [x] Vitória na Fase N (N < 5) exibe "Próxima Fase"
+- [x] Vitória na Fase 5 exibe conclusão (todas as fases completas)
+- [x] "Jogar Novamente" reinicia a fase atual sem perder progresso de fases anteriores na sessão
+- [x] Pontuação acumula entre fases na mesma sessão
+- [x] Loop core preservado (construir → validar → Ir! → vencer)
+
+### Resumo da Entrega
+
+- **Versão:** 1.1.0 — **US-100 ENTREGUE**
+- **Módulo:** `src/data/levels.js`
+- **Build:** OK (`npm run build`)
+- **QA:** `docs/qa-sprint-6.md`
+
+### Ordem de Execução
+
+1. **Software Architect** — `src/data/levels.js` + contrato de fase; refatorar `config.js`/`GridSystem`
+2. **Gameplay Developer** — carregar fase, avanço pós-vitória, score entre fases
+3. **UI/UX Designer** — HUD fase, botões Vitória (Próxima Fase / Conclusão)
+4. **QA** — regressão MVP + 5 fases end-to-end
+5. **Documentation** — GDD, architecture, changelog
+6. **Build & Release** — tag 1.1.0 + deploy
+
+### Riscos
+
+- Refatorar posições hardcoded em `GameScene.createGrid()` — risco de regressão visual
+- Reinício vs. avanço de fase — estados conflitantes no `VictoryOverlay`
+
+### Dependências
+
+- DEC-011 (aprovada)
+- MVP 1.0.0 estável em produção
+
+---
+
 ## Sprint 5 — Publicação Web (MVP)
 
 **Status:** Concluída
@@ -22,24 +95,23 @@
 | S5-04 | docs/deploy.md + RELEASE_NOTES | Documentation | Concluído |
 | S5-05 | Smoke tests build produção | QA | Aprovado (9/9 local) |
 | S5-06 | DEC-009 GitHub Pages | Scrum Master | Concluído |
-| S5-07 | URL pública live | Build & Release | Pendente push remoto |
+| S5-07 | URL pública live | Build & Release | Concluído |
 
 ### Resumo da Entrega
 
-- **Versão:** 1.0.0 — **MVP COMPLETO**
+- **Versão:** 1.0.0 — **MVP COMPLETO E PUBLICADO**
+- **URL:** https://gibritom.github.io/gamerabiit/
 - **CI/CD:** `.github/workflows/deploy.yml`
-- **Docs:** deploy.md, RELEASE_NOTES.md, qa-sprint-5.md
-- **QA:** 9/9 testes locais aprovados; URL pública aguarda push
+- **QA:** 10/10 testes aprovados (incl. URL pública)
 - **MVP:** 9/9 itens de project-context.md entregues
 
 ### Pendências
 
-- Push inicial para GitHub + habilitar Pages (ação do Game Director)
-- Tag `v1.0.0` no remoto
+- Nenhuma — MVP concluído.
 
 ### Próxima evolução (pós-MVP)
 
-US-100 (fases), US-101 (colecionáveis), US-102 (Telegram), KI-001 (bundle).
+US-100 → **Sprint 6 (em planejamento)** · US-101 (colecionáveis) · US-102 (Telegram) · KI-001 (bundle).
 
 ---
 
@@ -53,6 +125,7 @@ US-100 (fases), US-101 (colecionáveis), US-102 (Telegram), KI-001 (bundle).
 
 | Sprint | Status | Versão | Data |
 |--------|--------|--------|------|
+| 6 — Múltiplas Fases | Concluída | 1.1.0 | 2026-06-19 |
 | 5 — Publicação MVP | Concluída | 1.0.0 | 2026-06-18 |
 | 4 — Visual Polish | Concluída | 0.5.1 | 2026-06-18 |
 | 3 — Pontuação e Sons | Concluída | 0.4.0 | 2026-06-18 |

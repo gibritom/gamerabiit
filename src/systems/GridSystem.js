@@ -1,17 +1,17 @@
 import {
   GRID_COLS,
   GRID_ROWS,
-  MAX_PATH_TILES,
   TILE_EMPTY,
   TILE_PATH,
   TILE_RABBIT,
   TILE_CARROT,
-  RABBIT_START,
-  CARROT_START,
 } from '../config.js';
 
 export default class GridSystem {
-  constructor() {
+  constructor(level) {
+    this.rabbitStart = level.rabbit;
+    this.carrotStart = level.carrot;
+    this.maxPathTiles = level.maxPathTiles;
     this.grid = this.createEmptyGrid();
     this.pathTilesUsed = 0;
   }
@@ -21,8 +21,8 @@ export default class GridSystem {
       Array(GRID_COLS).fill(TILE_EMPTY)
     );
 
-    grid[RABBIT_START.row][RABBIT_START.col] = TILE_RABBIT;
-    grid[CARROT_START.row][CARROT_START.col] = TILE_CARROT;
+    grid[this.rabbitStart.row][this.rabbitStart.col] = TILE_RABBIT;
+    grid[this.carrotStart.row][this.carrotStart.col] = TILE_CARROT;
 
     return grid;
   }
@@ -38,7 +38,7 @@ export default class GridSystem {
 
   canPlacePath(col, row) {
     if (this.getCell(col, row) !== TILE_EMPTY) return false;
-    return this.pathTilesUsed < MAX_PATH_TILES;
+    return this.pathTilesUsed < this.maxPathTiles;
   }
 
   placePath(col, row) {
@@ -67,11 +67,15 @@ export default class GridSystem {
   }
 
   getRemainingTiles() {
-    return MAX_PATH_TILES - this.pathTilesUsed;
+    return this.maxPathTiles - this.pathTilesUsed;
   }
 
   getPathTilesUsed() {
     return this.pathTilesUsed;
+  }
+
+  getMaxPathTiles() {
+    return this.maxPathTiles;
   }
 
   getGridCopy() {

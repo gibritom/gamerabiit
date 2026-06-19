@@ -120,3 +120,29 @@ Toda decisão aprovada permanece registrada. Nunca remover decisões antigas.
 | **Motivo** | Concluir último item do MVP em project-context.md. |
 | **Aprovado por** | Game Director |
 | **Impacto** | Marca entrega oficial do MVP; novas features exigem aprovação pós-MVP. |
+
+---
+
+## DEC-010
+
+| Campo | Valor |
+|-------|-------|
+| **Data** | 2026-06-19 |
+| **Título** | MVP publicado no GitHub Pages |
+| **Descrição** | Jogo disponível publicamente em https://gibritom.github.io/gamerabiit/ via GitHub Actions. |
+| **Motivo** | Conclusão da Sprint 5 e do MVP. |
+| **Aprovado por** | Game Director |
+| **Impacto** | Projeto "O Caminho do Coelho" MVP entregue. |
+
+---
+
+## DEC-011
+
+| Campo | Valor |
+|-------|-------|
+| **Data** | 2026-06-19 |
+| **Título** | Aprovação Sprint 6 — US-100 Múltiplas Fases |
+| **Descrição** | Game Director aprovou primeira evolução pós-MVP: **5 fases jogáveis com progressão linear**. Versão alvo 1.1.0. US-101, US-102 e KI-001 permanecem no backlog futuro. |
+| **Motivo** | Aumentar retenção e replayability após MVP publicado. |
+| **Aprovado por** | Game Director |
+| **Impacto** | Sprint 6 planejada; escopo técnico em `docs/sprints.md`. |

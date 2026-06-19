@@ -1,7 +1,7 @@
 # GDD — O Caminho do Coelho
 
 **Agente responsável:** Game Designer  
-**Versão:** 1.4 (Sprint 4)  
+**Versão:** 1.5 (Sprint 6)  
 **Aprovado por:** Game Director
 
 ---
@@ -34,13 +34,13 @@ Construir um caminho contínuo do coelho até a cenoura usando os tiles disponí
 
 - Grid quadrado **8 colunas × 8 linhas** (64 células).
 - Cada célula pode ser: **vazia (grama)**, **caminho** ou **ocupada** (coelho/cenoura).
-- Coelho e cenoura ficam em posições fixas por fase (Sprint 0: posições de demonstração).
+- Coelho e cenoura ficam em posições fixas por fase (Sprint 6: 5 fases distintas em `levels.js`).
 
 ### 4.2 Construção de Caminho (Sprint 1+)
 
 - Jogador clica/toque em célula vazia → coloca tile de caminho.
 - Segundo clique em tile de caminho → remove o tile.
-- Limite de tiles por fase (Sprint 1: **20 tiles**).
+- Limite de tiles por fase (Sprint 6: **12–20 tiles**, decrescente por dificuldade).
 - Não é possível colocar tile sobre coelho ou cenoura.
 
 ### 4.3 Validação (Sprint 1+)
@@ -56,8 +56,17 @@ Construir um caminho contínuo do coelho até a cenoura usando os tiles disponí
 
 ### 4.5 Vitória e Reinício (Sprint 2+)
 
-- Ao chegar na cenoura: modal/tela de vitória com opção **"Jogar Novamente"**.
-- Reinício limpa tiles e restaura estado inicial.
+- Ao chegar na cenoura: modal/tela de vitória.
+- Fases 1–4: botões **Próxima Fase** e **Jogar Novamente**.
+- Fase 5: tela de conclusão (**Todas as Fases Completas**) com **Voltar ao Menu**.
+- Reinício limpa tiles e restaura a fase atual; score da sessão é preservado.
+
+### 4.7 Progressão de Fases (Sprint 6+)
+
+- 5 fases com dificuldade crescente (menos tiles, layouts mais exigentes).
+- Jogador inicia na Fase 1 ao clicar **JOGAR** no menu.
+- Score acumula entre fases na mesma sessão.
+- Novo jogo (menu) reseta fase e score.
 
 ### 4.6 Pontuação (Sprint 3+)
 
@@ -89,9 +98,13 @@ Construir um caminho contínuo do coelho até a cenoura usando os tiles disponí
 [Coelho em movimento]
     ↓ Chega na cenoura
 [Tela de Vitória]
-    ↓ Jogar Novamente
-[Cena de Jogo — reset]
+    ↓ Próxima Fase (Sprint 6+) ou Jogar Novamente
+[Cena de Jogo — próxima fase ou reset]
+    ↓ Fase 5 completa
+[Tela de Conclusão] → Voltar ao Menu
 ```
+
+**Sprint 6:** 5 fases jogáveis; progressão linear; HUD "Fase N"; conclusão após Fase 5.
 
 **Sprint 0:** apenas Tela Inicial → Cena de Jogo (grid estático, sem interação).
 
@@ -109,7 +122,7 @@ Construir um caminho contínuo do coelho até a cenoura usando os tiles disponí
 
 | Elemento | Posição | Sprint |
 |----------|---------|--------|
-| Título da fase | Topo central | 0 (placeholder) |
+| Título da fase | Topo central | 6 ✓ |
 | Tiles restantes | Canto superior direito | 1 |
 | Pontuação | Canto superior esquerdo | 3 |
 | Botão "Ir!" | Rodapé central | 2 |

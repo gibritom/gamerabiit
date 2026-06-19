@@ -4,6 +4,31 @@
 
 ---
 
+## 1.1.0 — 2026-06-19
+
+**Sprint:** 6 — Múltiplas Fases (US-100)
+
+### Adicionado
+
+- `src/data/levels.js` — 5 fases com posições e limites de tiles distintos
+- HUD exibe "Fase N" dinamicamente
+- Botão **Próxima Fase** no overlay de vitória (Fases 1–4)
+- Tela de conclusão após Fase 5 (**Todas as Fases Completas**)
+- Progressão linear: Fase 1 → 5 com score acumulado na sessão
+
+### Alterado
+
+- `GridSystem` recebe configuração por fase (coelho, cenoura, max tiles)
+- `ScoreSystem.calculate()` usa limite de tiles da fase ativa
+- `VictoryOverlay` suporta fluxos de próxima fase, reinício e conclusão
+- Menu **JOGAR** reseta fase e score da sessão
+
+### Removido
+
+- Constantes `RABBIT_START`, `CARROT_START`, `MAX_PATH_TILES` de `config.js` (migradas para `levels.js`)
+
+---
+
 ## 1.0.0 — 2026-06-18
 
 **Sprint:** 5 — Publicação Web (MVP)

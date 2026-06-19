@@ -4,15 +4,13 @@ import {
   GRID_COLS,
   GRID_ROWS,
   TILE_SIZE,
-  RABBIT_START,
-  CARROT_START,
   GRID_OFFSET_Y,
-  MAX_PATH_TILES,
   TILE_EMPTY,
   TILE_PATH,
   GAME_STATE,
 } from '../config.js';
 import { TEXTURES } from '../assets/AssetGenerator.js';
+import { getLevel, TOTAL_LEVELS } from '../data/levels.js';
 import GridSystem from '../systems/GridSystem.js';
 import PathValidator from '../systems/PathValidator.js';
 import RabbitMovement from '../systems/RabbitMovement.js';
@@ -27,8 +25,16 @@ export default class GameScene extends Phaser.Scene {
     super({ key: 'GameScene' });
   }
 
+  init() {
+    if (this.registry.get('currentLevelIndex') === undefined) {
+      this.registry.set('currentLevelIndex', 0);
+    }
+    this.levelIndex = this.registry.get('currentLevelIndex');
+    this.level = getLevel(this.levelIndex);
+  }
+
   create() {
-    this.gridSystem = new GridSystem();
+    this.gridSystem = new GridSystem(this.level);
     this.pathValidator = new PathValidator();
     this.rabbitMovement = new RabbitMovement(this);
     this.scoreSystem = new ScoreSystem();
@@ -67,7 +73,7 @@ export default class GameScene extends Phaser.Scene {
       color: '#5D4037',
     }).setOrigin(0.5);
 
-    this.add.text(GAME_WIDTH / 2, 16, 'Fase 1', {
+    this.phaseText = this.add.text(GAME_WIDTH / 2, 16, '', {
       fontFamily: 'Arial, sans-serif',
       fontSize: '20px',
       fontStyle: 'bold',
@@ -75,6 +81,7 @@ export default class GameScene extends Phaser.Scene {
       stroke: '#FFFFFF',
       strokeThickness: 2,
     }).setOrigin(0.5, 0);
+    this.phaseText.setText(`Fase ${this.level.id}`);
 
     this.add
       .image(GAME_WIDTH - 70, 26, TEXTURES.HUD_PANEL)
@@ -111,11 +118,14 @@ export default class GameScene extends Phaser.Scene {
   }
 
   createRabbit() {
-    const { x, y } = this.getCellWorldPos(RABBIT_START.col, RABBIT_START.row);
+    const { col, row } = this.gridSystem.rabbitStart;
+    const { x, y } = this.getCellWorldPos(col, row);
     this.rabbit = createRabbit(this, x, y);
   }
 
   createGrid() {
+    const { carrotStart } = this.gridSystem;
+
     for (let row = 0; row < GRID_ROWS; row++) {
       this.cellViews[row] = [];
       this.hitAreas[row] = [];
@@ -132,7 +142,7 @@ export default class GameScene extends Phaser.Scene {
           .setDisplaySize(TILE_SIZE - 2, TILE_SIZE - 2)
           .setVisible(false);
 
-        if (col === CARROT_START.col && row === CARROT_START.row) {
+        if (col === carrotStart.col && row === carrotStart.row) {
           this.add
             .image(x, y, TEXTURES.CARROT)
             .setDisplaySize(TILE_SIZE - 8, TILE_SIZE - 8)
@@ -200,14 +210,15 @@ export default class GameScene extends Phaser.Scene {
   }
 
   updateHud() {
-    this.tilesText.setText(`Tiles: ${this.gridSystem.getRemainingTiles()}/${MAX_PATH_TILES}`);
+    const max = this.gridSystem.getMaxPathTiles();
+    this.tilesText.setText(`Tiles: ${this.gridSystem.getRemainingTiles()}/${max}`);
   }
 
   updateGoButton() {
     this.isPathValid = this.pathValidator.hasValidPath(
       this.gridSystem.getGridCopy(),
-      RABBIT_START,
-      CARROT_START
+      this.gridSystem.rabbitStart,
+      this.gridSystem.carrotStart
     );
 
     const enabled = this.isPathValid && this.gameState === GAME_STATE.BUILDING;
@@ -229,8 +240,8 @@ export default class GameScene extends Phaser.Scene {
 
     const path = this.pathValidator.findPath(
       this.gridSystem.getGridCopy(),
-      RABBIT_START,
-      CARROT_START
+      this.gridSystem.rabbitStart,
+      this.gridSystem.carrotStart
     );
 
     if (!path) return;
@@ -269,17 +280,31 @@ export default class GameScene extends Phaser.Scene {
     this.gameState = GAME_STATE.VICTORY;
 
     const elapsedMs = Date.now() - this.phaseStartTime;
+    const maxPathTiles = this.gridSystem.getMaxPathTiles();
     const phaseScore = this.scoreSystem.calculate(
       this.gridSystem.getPathTilesUsed(),
-      elapsedMs
+      elapsedMs,
+      maxPathTiles
     );
     const sessionScore = (this.registry.get('sessionScore') || 0) + phaseScore;
     this.registry.set('sessionScore', sessionScore);
 
     this.audio.playVictory();
 
+    const isLastLevel = this.levelIndex >= TOTAL_LEVELS - 1;
     const overlay = new VictoryOverlay(this);
-    overlay.show(phaseScore, sessionScore, () => this.scene.restart());
+    overlay.show({
+      phaseScore,
+      sessionScore,
+      levelNumber: this.level.id,
+      isLastLevel,
+      onNextPhase: () => {
+        this.registry.set('currentLevelIndex', this.levelIndex + 1);
+        this.scene.restart();
+      },
+      onRestart: () => this.scene.restart(),
+      onMenu: () => this.scene.start('MenuScene'),
+    });
   }
 
   showFeedback(message, color) {

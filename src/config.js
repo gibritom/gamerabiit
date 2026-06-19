@@ -4,7 +4,6 @@ export const GAME_HEIGHT = 600;
 export const GRID_COLS = 8;
 export const GRID_ROWS = 8;
 export const TILE_SIZE = 64;
-export const MAX_PATH_TILES = 20;
 export const RABBIT_STEP_MS = 300;
 
 export const TILE_EMPTY = 'empty';
@@ -36,9 +35,6 @@ export const COLORS = {
   feedbackInvalid: 0xc62828,
   overlay: 0x000000,
 };
-
-export const RABBIT_START = { col: 0, row: 0 };
-export const CARROT_START = { col: 7, row: 0 };
 
 export const GRID_OFFSET_Y = 80;
 

@@ -1,5 +1,30 @@
 # Release Notes — O Caminho do Coelho
 
+## 1.1.0 — Múltiplas Fases (2026-06-19)
+
+**Sprint 6 — US-100**
+
+Primeira evolução pós-MVP: 5 fases jogáveis com progressão linear de dificuldade.
+
+### Novidades
+
+- **5 fases** com posições distintas de coelho/cenoura
+- Limite de tiles decrescente por fase (20 → 12)
+- HUD dinâmico **Fase N**
+- Botão **Próxima Fase** após vitória (Fases 1–4)
+- Tela **Todas as Fases Completas** na Fase 5
+- Pontuação acumulada na sessão
+
+### Jogar
+
+```
+https://gibritom.github.io/gamerabiit/
+```
+
+*(Deploy remoto após push para main)*
+
+---
+
 ## 1.0.0 — MVP (2026-06-18)
 
 **Sprint 5 — Publicação Web**

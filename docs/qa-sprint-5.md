@@ -4,7 +4,7 @@
 **Versão testada:** 1.0.0  
 **Ambiente:** Build de produção (`npm run preview` — simula deploy)  
 **Data:** 2026-06-18  
-**Resultado:** APROVADO
+**Resultado:** APROVADO (10/10)
 
 ---
 
@@ -102,9 +102,9 @@
 
 | Campo | Valor |
 |-------|-------|
-| **Passos** | 1. Push para GitHub + habilitar Pages |
+| **Passos** | 1. Acessar https://gibritom.github.io/gamerabiit/ |
 | **Resultado esperado** | URL pública funcional |
-| **Status** | PENDENTE — aguarda push do Game Director |
+| **Status** | PASS |
 
 ---
 
@@ -114,5 +114,5 @@ Nenhum bug bloqueante no build de produção.
 
 ## Observações
 
-- TC-S5-010 será validado após primeiro deploy no GitHub remoto.
-- Preview local (`4173`) confirma paridade com `dist/` publicado.
+- URL pública validada pelo Game Director em 2026-06-19.
+- Deploy via GitHub Pages + GitHub Actions operacional.
