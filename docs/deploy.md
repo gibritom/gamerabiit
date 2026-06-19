@@ -21,7 +21,7 @@ git init
 git add .
 git commit -m "feat: MVP 1.0.0 — O Caminho do Coelho"
 git branch -M main
-git remote add origin https://github.com/gibritom/gamerabiit.git
+git remote add origin git@github.com-gibritom:gibritom/gamerabiit.git
 git push -u origin main
 ```
 
